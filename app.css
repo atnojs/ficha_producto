@@ -1,0 +1,315 @@
+/* === TEMA "GLASS + GRADIENT" === */
+:root{
+  --bg1:#0c1445;--bg2:#1e3a8a;--acc:#22d3ee;--acc2:#a78bfa;
+  --text:#e5e7eb;--muted:#94a3b8;--border:#1e40af;
+  --card-bg:rgba(15,23,42,.32);
+  --shadow-color:rgba(0,0,0,.35);--shadow-light:rgba(34,211,238,.2);
+  --danger:#ef4444;--danger-hover:#dc2626
+}
+
+/* Fondo */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:'Poppins',system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  color:var(--text);
+  background:linear-gradient(160deg,#0c1445 0%,#1e3a8a 25%,#0891b2 50%,#0c4a6e 75%,#1e293b 100%);
+  background-attachment:fixed;overflow-x:hidden;padding:2rem 1rem
+}
+
+/* ===== CONTENEDOR GENERAL ===== */
+#root > *{
+  background:var(--card-bg)!important;border:1px solid var(--border)!important;border-radius:16px!important;
+  box-shadow:0 10px 30px var(--shadow-color)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;
+  max-width:900px;margin:0 auto!important;padding:clamp(1.5rem,4vw,2.5rem)!important;color:var(--text)!important
+}
+
+/* Neutraliza utilidades gris de Tailwind dentro del contenedor, PERO NO EN BOTONES */
+#root > * [class*="bg-gray-"]:not(button){background:transparent!important}
+#root > * [class*="text-gray-300"],#root > * [class*="text-gray-400"]{color:var(--muted)!important}
+#root > * [class*="border-gray-"]{border-color:var(--border)!important}
+#root > * [class*="shadow-"]{box-shadow:none!important}
+
+/* Títulos y textos */
+h1,h2,h3{font-family:'Montserrat',sans-serif;color:var(--text)!important}
+h1{font-size:clamp(2rem,4.5vw,2.8rem)!important;text-align:center;text-shadow:0 4px 15px var(--shadow-color)}
+p,small{color:var(--muted)}
+
+/* ===== FORMULARIO ===== */
+:is(input,textarea,select){
+  background:rgba(15,23,42,.6)!important;color:var(--text)!important;
+  /* CAMBIO: Aumentado grosor del borde a 2px */
+  border:2px solid var(--border)!important;
+  border-radius:12px!important;padding:.9rem 1rem!important;outline:0!important;
+  transition:border-color .2s ease, box-shadow .2s ease, transform .06s ease
+}
+:is(input,textarea,select)::placeholder{color:var(--muted)!important}
+:is(input,textarea,select):hover{border-color:#3254c7!important}
+:is(input,textarea,select):focus{
+  border-color:var(--acc)!important;box-shadow:0 0 0 3px rgba(34,211,238,.18)!important;transform:translateY(-1px)
+}
+label{font-weight:600;color:var(--text)!important}
+
+/* ===== BOTONES ===== */
+button,.btn,[role="button"]{
+  padding:.95rem 1.2rem!important;border:none!important;border-radius:12px!important;
+  font-weight:700;font-family:'Poppins',sans-serif!important;
+  cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  transition:transform .15s ease,opacity .15s ease,box-shadow .2s ease
+}
+button:hover,.btn:hover{transform:translateY(-2px);opacity:.95}
+button:disabled,.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* Principal y variantes */
+/* CAMBIO: Añadido borde y asegurado fondo para el botón de generar */
+button[type="submit"],.btn-primary,[data-variant="primary"]{
+  background:linear-gradient(135deg,var(--acc),var(--acc2))!important;
+  color:#fff!important;
+  border: 2px solid rgba(255,255,255,0.2)!important; /* Borde sutil para definirlo */
+  box-shadow:0 4px 15px rgba(167,139,250,.3)!important
+}
+#root > * [class*="bg-green-"]{background:linear-gradient(135deg,#16a34a,#22c55e)!important;color:#fff!important}
+.btn-danger,[data-variant="danger"]{background:var(--danger)!important;color:#fff!important}
+.btn-danger:hover,[data-variant="danger"]:hover{background:var(--danger-hover)!important}
+
+/* ===== DROP ZONE (la de Tailwind del formulario) ===== */
+#root > * [class*="border-dashed"]{
+  border:2px dashed var(--border)!important;border-radius:16px!important;
+  background:rgba(15,23,42,.5)!important;color:var(--muted)!important;
+  padding:3rem 2rem!important;min-height:260px;display:flex;align-items:center;justify-content:center
+}
+
+/* ===== GRIDS DE IMÁGENES (para la vista de resultados) ===== */
+#image-preview-grid,#results-image-grid,.image-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;margin-top:1.5rem
+}
+.image-container{
+  position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border);
+  box-shadow:0 8px 25px var(--shadow-color);transition:transform .3s ease,box-shadow .3s ease;transform:translateZ(0);
+  aspect-ratio:1/1
+}
+.image-container img{width:100%;height:100%;object-fit:cover}
+.image-container:hover{transform:translateY(-6px);box-shadow:0 12px 35px var(--shadow-color),0 0 15px var(--shadow-light)}
+.overlay-buttons{position:absolute;top:12px;right:12px;z-index:10;display:flex;gap:8px;opacity:0;transition:opacity .3s ease}
+.image-container:hover .overlay-buttons{opacity:1}
+
+/* ===== ALERTAS ===== */
+[role="alert"]{
+  background:rgba(239,68,68,.12)!important;border:1px solid rgba(239,68,68,.55)!important;
+  color:#fecaca!important;box-shadow:0 6px 20px var(--shadow-color)
+}
+
+/* ===== LOADER ===== */
+@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.loader-spinner{border:4px solid rgba(255,255,255,.3);border-top:4px solid #4f46e5;border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite}
+
+/* Utilidades */
+.section-title{text-align:center;font-size:1.2rem;font-weight:600;color:var(--text);margin:1.5rem 0}
+.hidden{display:none}.center{text-align:center}
+
+/* ===== ESTILOS PARA EL MODAL DE EDICIÓN ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal-container {
+  background-color: rgba(15, 23, 42, 0.95);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 28rem;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 1rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.modal-field {
+  margin-bottom: 1rem;
+}
+
+.modal-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.modal-textarea {
+  display: block;
+  width: 100%;
+  background-color: rgba(15, 23, 42, 0.6);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.06s ease;
+  resize: vertical;
+}
+
+.modal-textarea::placeholder {
+  color: var(--muted);
+}
+
+.modal-textarea:hover {
+  border-color: #3254c7;
+}
+
+.modal-textarea:focus {
+  border-color: var(--acc);
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.18);
+  transform: translateY(-1px);
+}
+
+.modal-error {
+  color: #fca5a5;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.modal-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.2s ease;
+}
+
+.modal-button:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.modal-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.modal-button-cancel {
+  background-color: rgba(55, 65, 81, 0.8);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.modal-button-cancel:hover {
+  background-color: rgba(55, 65, 81, 1);
+}
+
+.modal-button-improve {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+  order: -1; /* Para que aparezca primero */
+}
+
+.modal-button-improve:hover {
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+.modal-button-submit {
+  background: linear-gradient(135deg, var(--acc), var(--acc2));
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(167, 139, 250, 0.3);
+}
+
+.modal-button-submit:hover {
+  box-shadow: 0 6px 20px rgba(167, 139, 250, 0.4);
+}
+
+
+
+
+
+
+/* ===== TIPOGRAFÍA PARA VISTA PREVIA ===== */
+.product-title-brush {
+  font-family: 'Brush Script MT', cursive;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem;
+  line-height: 1.1;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  
+  /* Gradiente moderno acorde con la app para que destaque sobre blanco */
+  background: linear-gradient(135deg, #1e3a8a 0%, #0c4a6e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #1e3a8a; /* Fallback */
+  
+  letter-spacing: 0.02em;
+  transform: rotate(-2deg);
+  transition: transform 0.3s ease;
+  padding-bottom: 10px; /* Espacio para la linea decorativa */
+}
+
+.product-title-brush::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 4px;
+  background: linear-gradient(90deg, #22d3ee 0%, #1e3a8a 100%); /* Colores de acento de la app */
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.product-title-modern::before {
+  display: none;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .product-title-brush {font-size:3rem;}
+}
+@media(max-width:480px){
+  .product-title-brush {font-size:2.5rem;}
+}
+
+/* Cursor para la lupa */
+.cursor-zoom-in {
+  cursor: zoom-in;
+}
+
+.cursor-zoom-out {
+  cursor: zoom-out;
+}
