@@ -60,7 +60,7 @@ try {
         ]
       ]]
     ];
-    $data = call_gemini("gemini-3-pro-image-preview", $body, $apiKey);
+    $data = call_gemini("gemini-3.1-flash-image-preview", $body, $apiKey);
     $text = $data['candidates'][0]['content']['parts'][0]['text'] ?? null;
     if (!$text) throw new Exception("Sin descripción");
     echo json_encode(['description' => $text], JSON_UNESCAPED_UNICODE);
